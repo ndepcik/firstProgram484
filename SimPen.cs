@@ -43,6 +43,8 @@ namespace Sim
             // Console.WriteLine($"x: {x[0].ToString()}   {x[1].ToString()}"  );
             // Console.WriteLine($"f: {f[0].ToString()}   {f[1].ToString()}"  );
         }
+        
+        //TODO 4th oder RK4
 
         public void rhsFunc(double[] st, double[] ff)
         {
