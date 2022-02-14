@@ -28,6 +28,16 @@ namespace Sim
             x[1] = 0.0;
 
         }
+        public SimPen(double dt)
+        {
+            // int n = (int)((x-x0) /h);   //number of itterations
+            
+            double[] y = new double[n];       //estamtes
+            double[] s = new double[n];       //time index
+
+            //  s[0] = 0.0;
+            //  y[0] = 1.0;
+        }
         /*methods ************************************************************
             step : perform intgration
             rhsFunc: function to calculate
@@ -40,12 +50,9 @@ namespace Sim
             {
                 x[i] = x[i] +f[i] * dt;
             }
-            // Console.WriteLine($"x: {x[0].ToString()}   {x[1].ToString()}"  );
-            // Console.WriteLine($"f: {f[0].ToString()}   {f[1].ToString()}"  );
         }
         
-        //TODO 4th oder RK4
-
+       
         public void rhsFunc(double[] st, double[] ff)
         {
             ff[0] = st[1];
@@ -90,5 +97,53 @@ namespace Sim
         }
 
 
+    }
+    public class RK : SimPen
+    {
+        private double yi = 0;
+        
+       public string tempStr = "RK : SimPen";
+
+       //TODO 4th oder RK4
+        public double RK4(double x0, double y0, double x, double h)
+        {
+        
+                double k1, k2, k3, k4;
+                yi = y0;
+                int num = (int) ( (x-x0) /h);   //number of itterations
+                
+
+                for(int i = 0; i < num; i++)
+                    {
+                        k1 = h * (dxdy(x0,yi));
+                        k2 = h * (dxdy(x0 + 0.5 *h ,yi + 0.5 *k1));
+                        k3 = h * (dxdy(x0 + 0.5 * h ,yi + 0.5 * k2));
+                        k4 = h * (dxdy(x0 + h,yi + k3));
+
+                        // y[i] = yi;
+                        yi += (1.0 / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4);  //update y
+                        x0 = x0 +h; //update x
+                    }
+                    return yi;       //yi
+        }
+        
+        public double dxdy(double x, double y)
+        {
+            return((x-y) /2);
+        }
+        
+        // public double s
+        // {
+        //     get { return s[1]; }
+
+        //     set { s[1] = value; }
+        // }
+        
+        // public double y
+        // {
+        //     get { return y[1]; }
+
+        //     set { y[1] = value; }
+        // }
     }
 }
