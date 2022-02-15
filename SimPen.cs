@@ -95,7 +95,10 @@ namespace Sim
         
     //    public string tempStr = "RK : SimPen";
 
-       //TODO 4th oder RK4
+       /*methods ************************************************************
+            rk4 : perform rk4
+            dxdy: diff
+        */
         public void RK4(double x0, double y0, double x, double h)
         {
         
@@ -122,7 +125,8 @@ namespace Sim
         {
             return((x-y) /2);
         }
-                
+
+        //getter and setter ***************************************************
         public double y
         {
             get { return yi; }
