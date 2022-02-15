@@ -28,16 +28,7 @@ namespace Sim
             x[1] = 0.0;
 
         }
-        public SimPen(double dt)
-        {
-            // int n = (int)((x-x0) /h);   //number of itterations
-            
-            double[] y = new double[n];       //estamtes
-            double[] s = new double[n];       //time index
-
-            //  s[0] = 0.0;
-            //  y[0] = 1.0;
-        }
+       
         /*methods ************************************************************
             step : perform intgration
             rhsFunc: function to calculate
@@ -102,10 +93,10 @@ namespace Sim
     {
         private double yi = 0;
         
-       public string tempStr = "RK : SimPen";
+    //    public string tempStr = "RK : SimPen";
 
        //TODO 4th oder RK4
-        public double RK4(double x0, double y0, double x, double h)
+        public void RK4(double x0, double y0, double x, double h)
         {
         
                 double k1, k2, k3, k4;
@@ -124,26 +115,19 @@ namespace Sim
                         yi += (1.0 / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4);  //update y
                         x0 = x0 +h; //update x
                     }
-                    return yi;       //yi
+                    // return yi;       //yi
         }
         
         public double dxdy(double x, double y)
         {
             return((x-y) /2);
         }
-        
-        // public double s
-        // {
-        //     get { return s[1]; }
+                
+        public double y
+        {
+            get { return yi; }
 
-        //     set { s[1] = value; }
-        // }
-        
-        // public double y
-        // {
-        //     get { return y[1]; }
-
-        //     set { y[1] = value; }
-        // }
+            set { yi = value; }
+        }
     }
 }
